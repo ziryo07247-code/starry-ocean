@@ -1,0 +1,602 @@
+/* 0. 기본 세팅 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Poor+Story&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: transparent !important;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+.starry-ocean-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: transparent !important;
+}
+
+/* 1. 타이틀 및 서브타이틀 */
+.space-title {
+  font-family: "Poor Story", cursive; /* 손글씨 느낌 폰트 */
+  color: #fff;
+  text-shadow:
+    0 0 10px #38bdf8,
+    0 0 20px #38bdf8,
+    0 0 30px #ea580c;
+  margin: 20px 0 10px 0;
+  font-size: 3rem;
+  text-align: center;
+  z-index: 10;
+}
+
+.space-subtitle {
+  text-align: center;
+  color: #94a3b8;
+  font-weight: 300;
+  font-size: 1rem;
+  margin-bottom: 0;
+  z-index: 10;
+}
+
+/* 2. 좌우 무한 파노라마 별밭 컨테이너 */
+.star-field-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 0;
+
+  position: relative;
+  background-color: transparent !important;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  white-space: nowrap;
+  cursor: grab;
+  user-select: none;
+}
+
+.star-field-wrapper:active {
+  cursor: grabbing;
+}
+
+/* 스크롤바 숨기기 (깔끔한 우주 화면을 위해) */
+.star-field-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* 전체 캔버스 (넉넉한 가로 폭) */
+.star-field-content {
+  position: relative;
+  width: 7200px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* 별 그룹 (좌, 본, 우 반복 배치용) */
+.star-group {
+  position: absolute;
+  top: 0;
+  width: 2400px;
+  min-height: 900px;
+}
+
+/* 개별 별 스타일링 (기본 크기 확대 및 클릭 영역 확보) */
+.star-memo {
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.star-memo:hover {
+  transform: scale(2);
+  z-index: 100;
+}
+
+/* 툴팁 위치도 커진 별 크기에 맞춰 살짝 조정 */
+.memo-tooltip {
+  position: absolute;
+  bottom: 25px; /* 별이 커진 만큼 위로 띄움 */
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+  font-family: "Noto Sans KR", sans-serif;
+  z-index: 101;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.star-memo:hover .memo-tooltip {
+  transform: translateX(-50%) scale(1);
+}
+
+/* 별이 깜빡거리는 애니메이션 */
+@keyframes starTwinkle {
+  from {
+    background-position:
+      0 0,
+      40px 60px,
+      130px 270px;
+  }
+  to {
+    background-position:
+      550px 550px,
+      590px 610px,
+      680px 820px;
+  }
+}
+
+@keyframes starAppear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 별 호버 시 스타일 (마우스 올리면 커짐) */
+.star-memo:hover {
+  transform: scale(2.5) !important;
+  box-shadow:
+    0 0 15px #fff,
+    0 0 30px #ea580c,
+    0 0 45px #ea580c;
+  z-index: 100;
+}
+
+/* 별 호버 시 툴팁 (제목 보여주기) */
+.memo-tooltip {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+  font-family: "Noto Sans KR", sans-serif;
+  z-index: 101;
+}
+
+.star-memo:hover .memo-tooltip {
+  transform: translateX(-50%) scale(1);
+}
+
+/* 3. 하단 고정 입력 박스 */
+.space-memo-box {
+  background: rgba(15, 23, 42, 0.8); /* 반투명 어두운 박스 */
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-top: 1px solid rgba(56, 189, 248, 0.3);
+  display: flex;
+  gap: 15px;
+  z-index: 20;
+}
+
+textarea {
+  flex-grow: 1;
+  height: 60px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #334155;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  resize: none;
+  font-family: inherit;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+button {
+  background: linear-gradient(
+    to right,
+    #ea580c,
+    #c2410c
+  ); /* 따뜻한 주황 그라데이션 */
+  color: white;
+  border: none;
+  padding: 0 30px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(to right, #c2410c, #9a3412);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 4. 상세 메모 모달 창 스타일링 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* 어두운 배경 오버레이 */
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: #fffdf0; /* 낡은 편지지 같은 색상 */
+  color: #111827;
+  padding: 40px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto; /* 내용이 길면 스크롤 */
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: scaleUpModal 0.3s ease-out;
+  font-family: "Poor Story", cursive; /* 손글씨 폰트 */
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+@keyframes scaleUpModal {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 0;
+}
+
+.modal-text {
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  margin: 0;
+}
+
+.modal-date {
+  font-size: 1rem;
+  color: #6b7280;
+  text-align: right;
+  margin-top: 30px;
+  font-weight: 300;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 모달 하단 액션 영역 */
+.modal-actions {
+  margin-top: 25px;
+  text-align: right;
+  border-top: 1px dashed #d1d5db;
+  padding-top: 15px;
+}
+
+/* 삭제 버튼 스타일 (감성적인 붉은 계열) */
+.delete-btn {
+  background: linear-gradient(to right, #ef4444, #dc2626) !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  font-size: 1rem !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  float: none !important; /* 기존 float 속성 초기화 */
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(to right, #dc2626, #b91c1c) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* --- 2. 하단 컨트롤 영역 및 입력 박스 (투명한 유리 패널) --- */
+.bottom-controls {
+  z-index: 1000;
+  display: flex;
+  flex-direction: row; /* 가로로 정렬 */
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(
+    15,
+    23,
+    42,
+    0.25
+  ); /* 👈 남색 상자 느낌을 없애고 투명하게 처리 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.space-memo-box {
+  background: rgba(15, 23, 42, 0.4); /* 👈 투명한 글래스 스타일 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 20;
+}
+
+textarea {
+  flex-grow: 1;
+  height: 50px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(
+    2,
+    6,
+    23,
+    0.5
+  ); /* 👈 텍스트 입력창 내부도 은은하게 투명하게 */
+  color: #f1f5f9;
+  resize: none;
+  font-family: inherit;
+  backdrop-filter: blur(5px);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* --- 3. AI 별자리 정보 카드 배너 수정 --- */
+.constellation-info-card {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.5); /* 👈 불투명한 상자 느낌 제거 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 20px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* AI 별자리 버튼 스타일 */
+.ai-constellation-btn {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s ease;
+}
+
+.ai-constellation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+}
+
+/* --- AI 별자리 SVG 오버레이 --- */
+.constellation-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2400px;
+  height: 100%;
+  pointer-events: none; /* 별 클릭을 방해하지 않음 */
+  z-index: 1;
+}
+
+/* 별자리 연결 선 반짝임 & 흐름 애니메이션 */
+.constellation-line {
+  stroke: rgba(224, 242, 254, 0.85);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  animation:
+    lineDash 25s linear infinite,
+    linePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes lineDash {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes linePulse {
+  0% {
+    opacity: 0.4;
+    stroke: rgba(186, 230, 253, 0.6);
+  }
+  100% {
+    opacity: 1;
+    stroke: rgba(244, 114, 182, 0.9);
+  }
+}
+
+/* AI 별자리 정보 배너 */
+.constellation-info-card {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1rem;
+}
+
+.info-desc {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.close-line-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #f43f5e;
+  padding: 2px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.close-line-btn:hover {
+  background: rgba(244, 63, 94, 0.2);
+}
+
+/* client/src/App.css 파일 하단에 추가 */
+
+/* 제목 입력 모달 오버레이 */
+.title-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* 제목 입력 모달 본체 박스 */
+.title-modal-content {
+  background: #0f172a;
+  border: 1px solid rgba(165, 180, 252, 0.3);
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.title-modal-content h3 {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.title-modal-content p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title-modal-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(165, 180, 252, 0.5);
+  background: #1e293b;
+  color: #fff;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.title-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.title-modal-cancel-btn {
+  padding: 8px 14px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.title-modal-submit-btn {
+  padding: 8px 16px;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}

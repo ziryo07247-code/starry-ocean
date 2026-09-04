@@ -1,0 +1,103 @@
+/* =========================
+   Star Field Wrapper
+========================= */
+
+.star-field-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+
+  cursor: grab;
+}
+
+.star-field-wrapper:active {
+  cursor: grabbing;
+}
+
+/* =========================
+   Star Field Content
+========================= */
+
+.star-field-content {
+  position: relative;
+
+  min-height: 1200px;
+
+  overflow: visible;
+}
+
+/* =========================
+   Island
+========================= */
+
+.star-island {
+  position: absolute;
+
+  top: 0;
+
+  width: 1200px;
+  height: 1200px;
+
+  overflow: visible;
+
+  transition: transform 0.25s ease-out;
+
+  pointer-events: none;
+
+  z-index: 20;
+}
+
+.star-island.current {
+  z-index: 30;
+}
+
+/* =========================
+   Island Title
+========================= */
+
+.star-island-title {
+  position: absolute;
+
+  top: 80px;
+  left: 100px;
+
+  color: #ffffff;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transition: opacity 0.8s ease-in-out;
+
+  z-index: 100;
+}
+
+.star-island-title.visible {
+  opacity: 1;
+}
+
+/* =========================
+   Island Name
+========================= */
+
+.star-island-name {
+  font-size: 28px;
+  font-weight: bold;
+
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+
+  margin-bottom: 8px;
+}
+
+/* =========================
+   Island Subtitle
+========================= */
+
+.star-island-subtitle {
+  font-size: 16px;
+
+  color: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,42 @@
+/* 하단 컨트롤 전체 영역 */
+.bottom-controls {
+  position: relative;
+  width: 100%;
+}
+
+/* AI 별 자동배치 버튼 */
+.ai-constellation-btn {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+/* AI 자동배치 버튼 마우스 오버 */
+.ai-constellation-btn:hover {
+  background-color: #4338ca;
+}
+
+/* 메모 입력 폼 */
+.space-memo-box {
+  display: flex;
+  align-items: center;
+}
+
+/* 메모 입력창 */
+.space-memo-box textarea {
+  resize: none;
+  outline: none;
+}
+
+/* 메모 등록 버튼 */
+.space-memo-box button {
+  border: none;
+  cursor: pointer;
+}
+
+/* AI 분석 중 버튼 */
+.space-memo-box button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

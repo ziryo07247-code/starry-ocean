@@ -1,0 +1,271 @@
+.memo-modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(5, 8, 20, 0.75);
+
+  backdrop-filter: blur(10px);
+
+  z-index: 3000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   모달
+========================= */
+
+.memo-modal {
+  width: 420px;
+  max-width: 90%;
+
+  background: rgba(15, 23, 42, 0.96);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  border-radius: 20px;
+
+  padding: 28px;
+
+  color: #fff;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================
+   헤더
+========================= */
+
+.memo-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.memo-modal-title {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #a5b4fc;
+}
+
+/* =========================
+   닫기
+========================= */
+
+.memo-modal-close {
+  background: transparent;
+
+  border: none;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.memo-modal-close:hover {
+  color: #fff;
+}
+
+/* =========================
+   메모 내용
+========================= */
+
+.memo-content {
+  background: rgba(255, 255, 255, 0.05);
+
+  border-radius: 12px;
+
+  padding: 18px;
+
+  margin-bottom: 20px;
+
+  line-height: 1.7;
+
+  font-size: 15px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  white-space: pre-wrap;
+}
+
+/* =========================
+   섬 이동 영역
+========================= */
+
+.memo-move-section {
+  margin-bottom: 20px;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  background: rgba(99, 102, 241, 0.08);
+
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.memo-move-title {
+  font-size: 14px;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+
+  color: #c7d2fe;
+}
+
+/* =========================
+   섬 선택
+========================= */
+
+.island-select {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  background: #1e293b;
+
+  color: #fff;
+
+  outline: none;
+
+  margin-bottom: 10px;
+
+  cursor: pointer;
+}
+
+.island-select:focus {
+  border-color: rgba(165, 180, 252, 0.6);
+}
+
+/* =========================
+   이동 확인
+========================= */
+
+.confirm-move-button {
+  width: 100%;
+
+  padding: 11px;
+
+  border-radius: 8px;
+
+  border: none;
+
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+
+  color: #fff;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.confirm-move-button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.confirm-move-button:disabled {
+  background: rgba(255, 255, 255, 0.1);
+
+  cursor: not-allowed;
+
+  opacity: 0.6;
+}
+
+/* =========================
+   하단 버튼
+========================= */
+
+.memo-modal-actions {
+  display: flex;
+
+  gap: 10px;
+}
+
+/* =========================
+   닫기 버튼
+========================= */
+
+.memo-close-button {
+  flex: 1;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.memo-close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   삭제 버튼
+========================= */
+
+.memo-delete-button {
+  flex: 1;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  border: none;
+
+  background: rgba(239, 68, 68, 0.15);
+
+  color: #fca5a5;
+
+  cursor: pointer;
+}
+
+.memo-delete-button:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* =========================
+   다른 섬으로 이동
+========================= */
+
+.memo-move-button {
+  width: 100%;
+
+  padding: 12px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(165, 180, 252, 0.3);
+
+  background: rgba(99, 102, 241, 0.15);
+
+  color: #a5b4fc;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.memo-move-button:hover {
+  background: rgba(99, 102, 241, 0.25);
+}

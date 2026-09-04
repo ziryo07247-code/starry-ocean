@@ -1,0 +1,28 @@
+파일 핵심 역할
+main.jsx React 애플리케이션 시작
+App.jsx 전체 상태와 기능 조율
+App.css 전체 화면 스타일
+client.js Backend API 호출
+StarField.jsx 전체 별자리 영역
+ConstellationCanvas.jsx 별과 연결선 렌더링
+NightSkyBackground.jsx 밤하늘/별/유성 배경
+MiniMap.jsx 현재 위치 기반 미니맵
+MapModal.jsx 전체 섬 지도
+MemoModal.jsx 메모 상세/삭제/이동
+TitleModal.jsx 별 이름 입력
+AddIslandModal.jsx 섬 생성
+BottomControls.jsx 메모 입력/AI 자동배치
+useIslandsAndMemos.js 섬/메모 데이터 관리
+useConstellation.js 별자리 관련 상태/로직
+useIslandScrollSync.js 스크롤과 현재 섬 동기화
+useDragScroll.js 드래그 스크롤
+starPosition.js 별 위치 관련 공통 계산
+server.js Express 서버 시작 및 API 연결
+islands.js 섬 API 경로
+memos.js 메모 API 경로
+aiMemos.js AI 메모 API 경로
+islandController.js 섬 CRUD 처리
+memoController.js 메모 CRUD/이동 처리
+aiMemoController.js AI 메모/자동배치 처리
+embeddingService.js Embedding/유사도 처리
+db.js MySQL 연결

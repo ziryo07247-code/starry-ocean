@@ -1,0 +1,74 @@
+Starry-ocean_v2
+│
+├── client/ ← Frontend
+│ │
+│ ├── index.html ← React 시작 HTML
+│ │
+│ └── src/
+│ │
+│ ├── main.jsx ← React 진입점
+│ ├── App.jsx ← 전체 화면/기능 조율
+│ ├── App.css ← 전체 화면 스타일
+│ │
+│ ├── api/
+│ │ └── client.js ← Backend API 호출
+│ │
+│ ├── components/ ← 화면 구성 요소
+│ │ ├── AddIslandModal.jsx
+│ │ ├── BottomControls.jsx
+│ │ ├── ConstellationCanvas.jsx
+│ │ ├── MapModal.jsx
+│ │ ├── MemoModal.jsx
+│ │ ├── MiniMap.jsx
+│ │ ├── NightSkyBackground.jsx
+│ │ ├── StarField.jsx
+│ │ └── TitleModal.jsx
+│ │
+│ ├── components_css/ ← Components 전용 CSS
+│ │ ├── AddIslandModal.css
+│ │ ├── BottomControls.css
+│ │ ├── ConstellationCanvas.css
+│ │ ├── MapModal.css
+│ │ ├── MemoModal.css
+│ │ ├── MiniMap.css
+│ │ ├── NightSkyBackground.css
+│ │ ├── StarField.css
+│ │ └── TitleModal.css
+│ │
+│ ├── hooks/ ← 상태/기능 로직
+│ │ ├── useConstellation.js
+│ │ ├── useDragScroll.js
+│ │ ├── useIslandsAndMemos.js
+│ │ └── useIslandScrollSync.js
+│ │
+│ └── utils/
+│ └── starPosition.js ← 별 위치 관련 공통 계산
+│
+├── server/ ← Backend
+│ │
+│ ├── server.js ← Express 서버 시작점
+│ │
+│ ├── config/
+│ │ └── db.js ← MySQL 연결
+│ │
+│ ├── routes/ ← API URL 정의
+│ │ ├── aiMemos.js
+│ │ ├── islands.js
+│ │ └── memos.js
+│ │
+│ ├── controllers/ ← API 실제 처리
+│ │ ├── aiMemoController.js
+│ │ ├── islandController.js
+│ │ └── memoController.js
+│ │
+│ └── services/ ← 공통/전문 로직
+│ └── embeddingService.js ← AI 임베딩/유사도
+│
+├── docs/
+│ └── v2초기 기획 순서.md ← 초기 기획 문서
+│
+├── .env ← 환경변수
+├── .env.example ← 환경변수 예시
+├── .gitignore ← Git 제외 설정
+├── package.json ← Root 프로젝트 설정
+└── package-lock.json

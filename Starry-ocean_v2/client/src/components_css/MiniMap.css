@@ -1,0 +1,188 @@
+/* =========================
+   Mini Map
+========================= */
+
+.mini-map {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 280px;
+  height: 130px;
+
+  background: rgba(5, 8, 25, 0.82);
+  border: 1px solid rgba(165, 180, 252, 0.35);
+  border-radius: 12px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+
+  z-index: 1500;
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+/* =========================
+   제목
+========================= */
+
+.mini-map-title {
+  position: absolute;
+
+  top: 7px;
+  left: 10px;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 10px;
+  font-weight: bold;
+
+  z-index: 5;
+}
+
+/* =========================
+   좌우 화살표
+========================= */
+
+.mini-map-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 12px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.mini-map-arrow-left {
+  left: 4px;
+}
+
+.mini-map-arrow-right {
+  right: 4px;
+}
+
+/* =========================
+   섬
+========================= */
+
+.mini-map-island {
+  position: absolute;
+
+  top: 25px;
+  height: 95px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: transparent;
+}
+
+.mini-map-island:last-of-type {
+  border-right: none;
+}
+
+.mini-map-island.current {
+  background: rgba(129, 140, 248, 0.08);
+}
+
+/* =========================
+   섬 번호
+========================= */
+
+.mini-map-island-number {
+  position: absolute;
+
+  top: 2px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 9px;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-weight: bold;
+
+  white-space: nowrap;
+}
+
+.mini-map-island.current .mini-map-island-number {
+  color: #a5b4fc;
+}
+
+/* =========================
+   섬 이름
+========================= */
+
+.mini-map-island-name {
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 7px;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   연결선
+========================= */
+
+.mini-map-connections {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+}
+
+.mini-map-connection-line {
+  stroke: rgba(165, 180, 252, 0.45);
+  stroke-width: 1;
+}
+
+/* =========================
+   메모 별
+========================= */
+
+.mini-map-memo {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: rgba(165, 180, 252, 0.8);
+
+  box-shadow: 0 0 3px rgba(165, 180, 252, 0.6);
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+.mini-map-memo.current {
+  background: #ffffff;
+
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+}
