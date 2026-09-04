@@ -1,9 +1,0 @@
-.night-sky-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1; /* 메모와 UI 요소들보다 항상 뒤에 위치 */
-  pointer-events: none; /* 마우스 클릭이 배경을 뚫고 메모에 닿도록 설정 */
-}
