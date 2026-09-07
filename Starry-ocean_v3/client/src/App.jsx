@@ -140,6 +140,7 @@ function App() {
         island_id: currentIsland,
       });
 
+      console.log("🔥 AI memoTitle:", memoTitle);
       if (response.status === 201) {
         setContent("");
         setMemoTitle("");

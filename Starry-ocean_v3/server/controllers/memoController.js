@@ -57,6 +57,7 @@ async function getAllMemos(req, res) {
 async function createMemo(req, res) {
   try {
     const { title, content, island_id } = req.body;
+    console.log("📌 메모 생성 요청:", req.body);
     const targetIsland = island_id || 1;
 
     if (!content || content.trim() === "") {
@@ -66,6 +67,8 @@ async function createMemo(req, res) {
       });
     }
 
+    console.log("🔥 title:", title);
+    console.log("🔥 memoTitle:", memoTitle);
     const memoTitle = title && title.trim() !== "" ? title.trim() : null;
 
     const [result] = await db.query(

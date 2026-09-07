@@ -60,9 +60,12 @@
 /* 🏷️ 별 이름 */
 .memo-star-label {
   position: absolute;
-  top: 16px;
+  top: 25px;
   left: 50%;
-  transform: translateX(-50%) translateY(-4px);
+  transform: translateX(-50%) translateY(-10px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 
   font-size: 13px;
   font-weight: 500;
@@ -75,18 +78,12 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 
   white-space: nowrap;
-  pointer-events: none;
-
-  opacity: 0;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
 
   z-index: 1000;
 }
 
 /* 🏷️ 마우스 올렸을 때 이름 표시 */
-.memo-star-label.visible {
+/* .memo-star-label.visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
+} */

@@ -16,8 +16,8 @@ const SIMILARITY_THRESHOLD_LAYOUT = 0.75;
  */
 async function createAIMemo(req, res) {
   try {
-    const { content, island_id } = req.body;
-
+    const { title, content, island_id } = req.body;
+    const memoTitle = title && title.trim() !== "" ? title.trim() : null;
     if (!content || !content.trim()) {
       return res.status(400).json({
         error: "메모 내용은 필수입니다.",
@@ -78,9 +78,16 @@ async function createAIMemo(req, res) {
 
     // 메모 저장
     const [result] = await db.query(
-      `INSERT INTO memos (content, island_id, x_coord, y_coord, embedding)
-       VALUES (?, ?, ?, ?, ?)`,
-      [content, island_id, x_coord, y_coord, JSON.stringify(newEmbedding)],
+      `INSERT INTO memos (title, content, island_id, x_coord, y_coord, embedding)
+        VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        memoTitle,
+        content,
+        island_id,
+        x_coord,
+        y_coord,
+        JSON.stringify(newEmbedding),
+      ],
     );
 
     return res.status(201).json({
@@ -89,6 +96,7 @@ async function createAIMemo(req, res) {
         id: result.insertId,
         island_id,
         content,
+        title: memoTitle,
         x_coord,
         y_coord,
         connectedMemoId,
